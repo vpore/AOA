@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+/*#include<bits/stdc++.h>
 using namespace std;
 
 void printLCS(vector<vector<int>> b, string X, int i, int j){
@@ -55,5 +55,60 @@ int main(){
         Y[i] = Y[i-1];
 
     LCS(X, Y);
+    return 0;
+}*/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s1, s2;
+    cout << "Enter first string" << endl;
+    cin >> s1;
+    cout << "Enter second string" << endl;
+    cin >> s2;
+    int dp[s1.length() + 1][s2.length() + 1];
+    int n = s1.length(), m = s2.length();
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= m; j++) {
+            if (i == 0 || j == 0)
+                dp[i][j] = 0;
+            else
+            {
+                if (s1[i - 1] == s2[j - 1])
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+            cout << dp[i][j] << " ";
+        }
+        cout << endl;
+    }
+    int index = dp[n][m];
+    char lcs[index + 1]={};
+    lcs[index] = '\0';
+    int i = n, j = m;
+    while (i > 0 && j > 0)
+    {
+        // If current character in X and Y are same, then
+        // current character is part of LCS
+        if (s1[i - 1] == s2[j - 1])
+        {
+            lcs[index - 1] = s1[i - 1]; // Put current character in result
+            i--; j--; index--;     // reduce values of i, j and index
+        }
+
+        // If not same, then find the larger of two and
+        // go in the direction of larger value
+        else if (dp[i - 1][j] > dp[i][j - 1])
+            i--;
+        else
+            j--;
+    }
+
+    cout << "LCS is " << lcs << endl;
+
     return 0;
 }

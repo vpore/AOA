@@ -6,9 +6,13 @@ vector<int> w;
 int n, M;
 
 void printSoln(vector<double> x){
-    int sum=0;
+    int sum=0, j=1;
+    cout<<"\nItems in Knapsack - \n"<<endl;
+    cout<<"Object\tFraction"<<endl;
     for(auto i=x.begin(); i!=x.end(); i++){
+        cout<<j<<"\t";
         cout<<fixed<<setprecision(2)<<*i<<endl;
+        ++j;
     }
     for(int i=0; i<n; i++){
         sum+=(x[i])*(p[i]);
@@ -49,6 +53,11 @@ int main(){
         w.push_back(val);
     }
 
+    cout<<"\nObject\tProfit\tWeight\tProfit/Weight Ratio"<<endl;
+    for(i=0; i<n; i++){
+        cout<<i+1<<"\t"<<p[i]<<"\t"<<w[i]<<"\t"<<p[i]/w[i]<<endl;
+    }
+
     for(i=0; i<n; i++){
         for(j=0; j<n; j++){
             if(p[i]/w[i] > p[j]/w[j]){
@@ -60,6 +69,12 @@ int main(){
                 w[i]=temp;
             }
         }
+    }
+
+    cout<<"\nAfter Sorting..."<<endl;
+    cout<<"\nObject\tProfit\tWeight"<<endl;
+    for(i=0; i<n; i++){
+        cout<<i+1<<"\t"<<p[i]<<"\t"<<w[i]<<endl;
     }
 
     Knapsack();

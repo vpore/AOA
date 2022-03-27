@@ -8,15 +8,15 @@ int V,E;
 
 void bellmanFord(vector<edge>& Edges)
 {
-	int parent[V];		//Stores Shortest Path Structure
-	int cost_parent[V];	//Cost of the node to parent edge weight
-	vector<int> value(V,INT_MAX);	//Keeps shortest path values to each vertex from source
+	int parent[V];		
+	int cost_parent[V];	
+	vector<int> value(V,INT_MAX);	
 	
-	//Assuming start point as Node-0
-	parent[0] = -1;	//Start node has no parent
-	value[0] = 0;	//start node has value=0 to get picked 1st
+	
+	parent[0] = -1;	
+	value[0] = 0;	
 
-	//Include (V-1) edges to cover all V-vertices
+	
 	bool updated;
 	for(int i=0;i<V-1;++i)
 	{
@@ -37,7 +37,7 @@ void bellmanFord(vector<edge>& Edges)
 		if(updated==false)
 			break;
 	}
-	//Now check by relaxing once more if we have a negative edge cycle
+	
 	for(int j=0;j<E and updated==true;++j)
 		{
 			int U = Edges[j].src;
@@ -49,17 +49,17 @@ void bellmanFord(vector<edge>& Edges)
 				return;
 			}
 		}
-	//Print Shortest Path Graph
+	
 	for(int i=1;i<V;++i)
-		cout<<"U->V: "<<parent[i]<<"->"<<i<<"  Cost to reach "<<parent[i]<<"from source 0 = "<<value[i]<<"\n";
+		cout<<"U->V: "<<parent[i]<<"->"<<i<<" = "<<value[i]<<"\n";
 }
 
 int main()
 {
-	cin>>V>>E;	//Enter no of Vertices and Edges
+	cin>>V>>E;	
 	vector<edge> Edges(E);
 
-	//Now input all E edges
+	
 	int src,dst,wt;
 	for(int i=0;i<E;++i)
 	{

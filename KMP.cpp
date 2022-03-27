@@ -33,7 +33,7 @@ void KMP_Matcher(string pattern, string text){
         if(pattern[j] == text[i])
             i++, j++;
         if(j == m){
-            cout<<"Pattern Found at:"<<i-m;
+            cout<<"Pattern Found at index :"<<i-m<<endl;
             j = p[j-1];
         }
         else if(i<n && pattern[j]!=text[i]){
