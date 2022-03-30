@@ -4,6 +4,7 @@ using namespace std;
 struct edge{
 	int src,dst,wt;
 };
+
 int V,E;
 
 void bellmanFord(vector<edge>& Edges)
