@@ -8,7 +8,7 @@ int cal(int temp[10][10],int t[10][10])
 	int i,j,m=0;
 	for(i=0;i < n;i++)
 		for(j=0;j < n;j++)
-		{
+		{ 
 			if(temp[i][j]!=t[i][j])
 			m++;
 		}
