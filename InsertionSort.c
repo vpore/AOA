@@ -11,7 +11,7 @@ void insertionSort(int arr[], int n){ //Insertion Sort function
             j=j-1;
         }
         arr[j+1]=val;
- 
+
         printf("\n");
         for(k=0; k<n; k++){ //Printing each iteration of Sorted Array
             printf("%d\t", arr[k]);
