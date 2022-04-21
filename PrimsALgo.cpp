@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int s;
 int minKey(vector<int> key, vector<bool> Q, int V){
     int min=INT16_MAX, minIndex;
     for(int i=0; i<V; i++){
@@ -12,10 +13,20 @@ int minKey(vector<int> key, vector<bool> Q, int V){
     return minIndex;
 }
 
-void printMST(vector<int> parent, vector<vector<int>> graph, int V){
+void printMST(vector<int> parent, vector<int> key, vector<vector<int>> graph, int V){
+    cout<<"\nFinal Values...";
+    cout<<"\nKEY arrray : \t";
+    for(auto it : key){
+        cout<<it<<"\t";
+    }
+    cout<<"\nPI arrray : \t";
+    for(auto it : parent){
+        cout<<it<<"\t";
+    }
     int sum=0;
-    cout<<"\nEdge\tWeight\n";
-    for(int i=1; i<V; i++){
+    cout<<"\n\nEdge\tWeight\n";
+    for(int i=0; i<V; i++){
+        if(i==s){continue;}
         sum += graph[i][parent[i]];
         cout<<parent[i]<<" - "<<i<<"\t"<<graph[i][parent[i]]<<endl;
     }
@@ -23,27 +34,25 @@ void printMST(vector<int> parent, vector<vector<int>> graph, int V){
 }
 
 void primsMST(vector<vector<int>> graph, int V){
-    // for(int i=0; i<V; i++){
-    //     for(int j=0; j<V; j++){
-    //         cout<<graph[i][j]<<"\t";
-    //     }
-    //     cout<<endl;
-    // }
+    
     vector<int> parent(V, -1);
     vector<int> key(V, INT16_MAX);
     vector<bool> Q(V, false);
 
-    // for(int i=0; i<V; i++){
-    //     key.push_back(INT16_MAX);
-    //     Q.push_back(false);
-    // }
+    cout<<"\nKEY array :\t";
+    for(auto it : key){
+        cout<<it<<"\t";
+    }
 
-    // for(int j=0; j<V; j++){
-    //     cout<<key[j]<<"\t"<<Q[j]<<endl;
-    // }
+    cout<<"\nPI array :\t";
+    for(auto it : parent){
+        cout<<it<<"\t";
+    }
 
-    key.at(0) = 0;
-    parent.push_back(-1);
+    cout<<"\n\nEnter starting vertex :";
+    cin>>s;
+
+    key.at(s) = 0;
     for(int count=0; count<V-1; count++){
         int u = minKey(key, Q, V);
         Q.at(u) = true;
@@ -55,31 +64,31 @@ void primsMST(vector<vector<int>> graph, int V){
         }        
     }
     
-    printMST(parent, graph, V);
+    printMST(parent, key, graph, V);
 }
 
 int main(){
-    int V, wt;
+    int V, wt, i, j;
     vector<vector<int>> graph;
-    cout<<"Enter number of Vertices"<<endl;
+    cout<<"Enter number of Vertices :";
     cin>>V;
-    cout<<"Enter WEIGHTS of each edge"<<endl;
-    for(int i=0; i<V; i++){
+    cout<<"Enter WEIGHTS of each edge :"<<endl;
+    for(i=0; i<V; i++){
         vector<int> row;
-        for(int j=0; j<V; j++){
-            cout<<"Enter weight of "<<i<<" - "<<j<<" edge  : ";
+        for(j=0; j<V; j++){
             cin>>wt;
             row.push_back(wt);
         }
         graph.push_back(row);
     }
 
-    // for(int i=0; i<V; i++){
-    //     for(int j=0; j<V; j++){
-    //         cout<<graph[i][j]<<"\t";
-    //     }
-    //     cout<<endl;
-    // }
+    cout<<"\nGraph is...\n";
+    for(i=0; i<V; i++){
+        for(j=0; j<V; j++){
+            cout<<graph[i][j]<<"\t";
+        }
+        cout<<"\n";
+    }
 
     primsMST(graph, V);
     
