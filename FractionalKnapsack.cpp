@@ -1,21 +1,24 @@
+//This ONE!!
+//Mine
+
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> p;
-vector<int> w;
+vector<double> p;
+vector<double> w;
+vector<vector<double>> objList;
 int n, M;
 
 void printSoln(vector<double> x){
-    int sum=0, j=1;
+    int sum=0;
     cout<<"\nItems in Knapsack - \n"<<endl;
     cout<<"Object\tFraction"<<endl;
-    for(auto i=x.begin(); i!=x.end(); i++){
-        cout<<j<<"\t";
-        cout<<fixed<<setprecision(2)<<*i<<endl;
-        ++j;
+    for(int i=0; i<x.size(); i++){
+        cout<<fixed<<setprecision(0)<<objList[i][3]<<"\t";
+        cout<<fixed<<setprecision(2)<<x[i]<<endl;
     }
     for(int i=0; i<n; i++){
-        sum+=(x[i])*(p[i]);
+        sum+=(x[i])*(objList[i][1]);
     }
     cout<<"Maximum profit: "<<sum<<endl;
 }
@@ -28,10 +31,10 @@ void Knapsack(){
         if(w[i]>remCapacity)
             break;
         x[i] = 1;
-        remCapacity-=w[i];
+        remCapacity-=objList[i][2];
     }
     if(i<=n){
-        x[i] = double(double(remCapacity)/w[i]);
+        x[i] = double(double(remCapacity)/objList[i][2]);
     }
     printSoln(x);
 }
@@ -56,25 +59,29 @@ int main(){
     cout<<"\nObject\tProfit\tWeight\tProfit/Weight Ratio"<<endl;
     for(i=0; i<n; i++){
         cout<<i+1<<"\t"<<p[i]<<"\t"<<w[i]<<"\t"<<p[i]/w[i]<<endl;
+        objList.push_back({double(p[i]/w[i]), p[i], w[i], double(i+1)});
     }
 
-    for(i=0; i<n; i++){
-        for(j=0; j<n; j++){
-            if(p[i]/w[i] > p[j]/w[j]){
-                temp=p[j];
-                p[j]=p[i];
-                p[i]=temp;
-                temp=w[j];
-                w[j]=w[i];
-                w[i]=temp;
-            }
-        }
-    }
+    sort(objList.rbegin(), objList.rend());
+
+    // for(i=0; i<n; i++){
+    //     for(j=0; j<n; j++){
+    //         if(p[i]/w[i] > p[j]/w[j]){
+    //             temp=p[j];
+    //             p[j]=p[i];
+    //             p[i]=temp;
+    //             temp=w[j];
+    //             w[j]=w[i];
+    //             w[i]=temp;
+    //         }
+    //     }
+    // }
 
     cout<<"\nAfter Sorting..."<<endl;
-    cout<<"\nObject\tProfit\tWeight"<<endl;
+    cout<<"\nObject\tProfit\tWeight\tRatio"<<endl;
     for(i=0; i<n; i++){
-        cout<<i+1<<"\t"<<p[i]<<"\t"<<w[i]<<endl;
+        //cout<<i+1<<"\t"<<p[i]<<"\t"<<w[i]<<endl;
+        cout<<objList[i][3]<<"\t"<<objList[i][1]<<"\t"<<objList[i][2]<<"\t"<<objList[i][0]<<endl;
     }
 
     Knapsack();
