@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void selectionSort(int arr[], int n){
+void selectionSort(int arr[], int n){ //The most min no. will be put first in the array, then second most min no. will be put second and so on..
     int i, j, k, min, temp;
 
     for(i=0; i<=n-2; i++){
@@ -19,7 +19,6 @@ void selectionSort(int arr[], int n){
         }
         printf("\n");
     }
-
     printf("Sorted Array:\n");
     for(k=0; k<n; k++){
         printf("%d\t", arr[k]);
@@ -35,6 +34,5 @@ void main(){
     for(int i=0; i<n; i++){
         scanf("%d", &arr[i]);
     }
-
     selectionSort(arr, n);
 }

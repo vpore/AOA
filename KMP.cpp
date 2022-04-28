@@ -1,11 +1,13 @@
 #include<bits/stdc++.h>
 #include<string.h>
 using namespace std;
-int p[50];
+
+int p[50]; // LPS table
+
 void calc_LPS(string pattern, int m){
-    int k = 0;
+    int k = 0; // stores length of previous longest pattern
     p[0] = 0;
-    int i = 1;
+    int i = 1; // iterator of pattern string
     while(i<m){
         if(pattern[k] == pattern[i]){
             k++;
@@ -27,13 +29,13 @@ void KMP_Matcher(string pattern, string text){
     int m = pattern.size();
     int n = text.size();
     calc_LPS(pattern, m);
-    int i = 0;
-    int j = 0;
+    int i = 0; // iterator on text string
+    int j = 0; // iterator on pattern string
     while(i < n){
         if(pattern[j] == text[i])
             i++, j++;
         if(j == m){
-            cout<<"Pattern Found at index :"<<i-m<<endl;
+            cout<<"Pattern Found at index : "<<i-m<<endl;
             j = p[j-1];
         }
         else if(i<n && pattern[j]!=text[i]){

@@ -1,8 +1,6 @@
-/* C program for Merge Sort */
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Function to print an array */
 void printArray(int A[], int size)
 {
 	int i;

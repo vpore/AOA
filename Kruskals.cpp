@@ -16,7 +16,7 @@ public:
 		parent = new int[n];
 		rank = new int[n];
         this->n=n;
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++){
 			parent[i] = -1;
 			rank[i] = 1;
 		}

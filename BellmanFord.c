@@ -10,7 +10,7 @@ int edge[10][3];
 bool updated;
 void readgraph(int V)
 {
-  int i=0,j=0; 
+  int i=0,j=0;
   printf("Enter graph in matrix form");
   for(i=0;i<V;i++)
   {
@@ -19,7 +19,6 @@ void readgraph(int V)
       scanf("%d",&G[i][j]);
     }
   }
-  
 }
 
 void displayGraph(int  V)
@@ -32,6 +31,7 @@ void displayGraph(int  V)
   }
   
 }
+
 void createtable(int V, int E)
 {int k = 0;
   for(int i = 0;i<V;i++)
@@ -52,6 +52,7 @@ void createtable(int V, int E)
   for(int i = 0;i<E;i++)
       printf("%d --> %d : %d \n",edge[i][0],edge[i][1],edge[i][2]);
 }
+
 void initialize(int V,int s)
 {
   for (int i = 0;i<V;i++)
@@ -67,7 +68,6 @@ void initialize(int V,int s)
       p[i] = -1;
     }
   }
-  
 }
 
 void relax(int u,int v,int w)
@@ -105,24 +105,24 @@ void printpath(int s,int v)
   
 }
 
-int main(void) {
+int main(void){
  int V,E,s;  //V = no.of Vertices, E = no.of Edges, S is source vertex
- 
+
     printf("Enter number of vertices in graph\n");
     scanf("%d",&V);
- 
+
     printf("Enter number of edges in graph\n");
     scanf("%d",&E);
-    
+
     readgraph(V);
     printf("\nGraph is \n");
     displayGraph(V);
-    
-    createtable(V,E);    
-     
+
+    createtable(V,E);
+
     printf("Enter source vertex in graph\n");
     scanf("%d",&s);
-    
+
     initialize(V,s);
     printf("\n shortest path estimate after initialization \n");
     for(int i =0;i<V;i++)
@@ -141,16 +141,15 @@ int main(void) {
         relax(edge[j][0],edge[j][1],edge[j][2]);
       }
       if(!updated){break;}
-    }    
-    
+    }   
   printf("\n shortest path estimate\n");
     for(int i =0;i<V;i++)
       printf("%d \t",d[i]);
 
-    printf("\n\n predecessor\n");  
+    printf("\n\n predecessor\n");
     for(int i =0;i<V;i++)
       printf("%d \t",p[i]);
-      
+
   int flag = negcycle(E);
   if (flag==1)
     printf("\nSSSP Exist");
@@ -160,13 +159,11 @@ int main(void) {
   printf("\nPrinting Path\n");
   for (int i = 0;i<=V-1;i++)
   {
-    
     if (i == s)
       continue;
-    printf("path from %d to %d is ",s,i);  
+    printf("path from %d to %d is ",s,i);
     printpath(s,i);
     printf("\n");
   }
-  
   return 0;
 }

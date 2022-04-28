@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
-void insertionSort(int arr[], int n){ //Insertion Sort function
+void insertionSort(int arr[], int n){ //
     int i, val, j, k;
     for(i=1; i<n; i++){ //looping array from index-1 till last index
         val = arr[i]; 
